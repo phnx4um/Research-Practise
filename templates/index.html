@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title>Video Player</title>
+  </head>
+  <body>
+    <h3>{{name}}</h3>
+    <video id="myVideo" width="640" height="360" controls >
+      <source src="//vjs.zencdn.net/v/oceans.mp4" type="video/mp4">
+      <source src="//vjs.zencdn.net/v/oceans.webm" type="video/ogg">
+          Your browser does not support HTML5 video.
+    </video>
+    <p>Playback position: <span id="demo"></span></p>
+    <p> Scene: <span id="scene"></span></p>
+    <script>
+      var s_time = {{ start_time }};
+      var lenght = {{ lenght }};
+      // Get the video element with id="myVideo"
+      var vid = document.getElementById("myVideo");
+      var scene_num = document.getElementById('scene');
+      let count = 0
+      let i = 0
+      // Assign an ontimeupdate event to the video element, and execute a function if the current playback position has changed
+      vid.ontimeupdate = function() {myFunction()};
+      function myFunction() {
+
+        if (vid.currentTime >= s_time[i]){ //check for seekbar
+          //code for activating raspberry pi pins based on
+          //prediction in that particular string
+          console.log("Activate")
+          count++;
+          i++;
+        }
+        // Display the current position of the video in a p element with id="demo"
+        document.getElementById("demo").innerHTML = vid.currentTime;
+        scene_num.innerHTML = count
+      }
+    </script>
+  </body>
+</html>
